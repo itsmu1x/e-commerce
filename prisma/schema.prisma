@@ -1,0 +1,54 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+model User {
+    id        String    @id @default(cuid())
+    name      String
+    email     String    @unique
+    password  String
+    isAdmin   Boolean   @default(false) @map("is_admin")
+    createdAt DateTime  @default(now()) @map("created_at")
+    updatedAt DateTime  @updatedAt @map("updated_at")
+    deletedAt DateTime? @map("deleted_at") // this is for the soft delete
+
+    @@index([id])
+    @@index([email])
+    @@map("users")
+}
+
+model Product {
+    id         String   @id @default(cuid())
+    name       String
+    slug       String?
+    cents      Int // the price in cents
+    hexes      String[]
+    sizes      String[]
+    images     String[]
+    categoryId Int      @map("category_id")
+    createdAt  DateTime @default(now()) @map("created_at")
+    updatedAt  DateTime @default(now()) @updatedAt @map("updated_at")
+
+    category Category @relation(fields: [categoryId], references: [id])
+
+    @@index([id])
+    @@map("products")
+}
+
+model Category {
+    id        Int      @id @default(autoincrement())
+    name      String   @unique
+    image     String
+    createdAt DateTime @default(now()) @map("created_at")
+    updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
+
+    products Product[]
+
+    @@index([name])
+    @@map("categories")
+}

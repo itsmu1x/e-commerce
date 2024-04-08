@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    body {
+        @apply min-h-dvh bg-body text-black font-sans;
+    }
+}
+
+.navItem {
+    @apply overflow-hidden after:block after:border-b-2 after:border-black after:scale-x-0 after:origin-left after:hover:scale-x-100 after:duration-300;
+
+    &.active {
+        @apply after:scale-x-100;
+    }
+}
+
+.divide-top {
+    @apply mt-12 md:mt-20;
+}
+
+.divide-bottom {
+    @apply mb-12 md:mb-20;
+}
+
+.divide-both {
+    @apply my-12 md:my-20;
+}
+
+.clean-input {
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+        /* display: none; <- Crashes Chrome on hover */
+        -webkit-appearance: none;
+        margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+    }
+
+    -moz-appearance: textfield;
+}
