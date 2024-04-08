@@ -12,6 +12,7 @@ model User {
     name      String
     email     String    @unique
     password  String
+    wishlist  String[] // it could be better than this but this is for demo purposes
     isAdmin   Boolean   @default(false) @map("is_admin")
     createdAt DateTime  @default(now()) @map("created_at")
     updatedAt DateTime  @updatedAt @map("updated_at")

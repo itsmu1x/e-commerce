@@ -13,6 +13,7 @@ const DEFAULT_SELECT = {
     email: true,
     createdAt: true,
     isAdmin: true,
+    wishlist: true,
 }
 
 function secretKey() {

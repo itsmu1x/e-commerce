@@ -16,28 +16,45 @@ import {
 import Image from "next/image"
 import ntc from "ntcjs"
 
+type WishlistProps = {
+    disabled?: boolean
+    number?: number
+}
+
+function WishlistButton({ disabled, number }: WishlistProps) {
+    return (
+        <Button
+            aria-label="Wishlist"
+            className="relative"
+            variant="ghost"
+            size="icon"
+            disabled={disabled}
+        >
+            <Star className="size-6" />
+            <Badge
+                className="px-1.5 absolute -top-0.5 -right-0.5"
+                variant="destructive"
+            >
+                {number ?? 0}
+            </Badge>
+            <span className="sr-only">Wishlist</span>
+        </Button>
+    )
+}
+
 export default function NavButtons() {
     const user = useAuth()
     const cart = useCart()
 
     return (
         <div className="flex items-center gap-2">
-            <Button
-                aria-label="Wishlist"
-                className="relative"
-                variant="ghost"
-                size="icon"
-                disabled={!user}
-            >
-                <Star className="size-6" />
-                <Badge
-                    className="px-1.5 absolute -top-0.5 -right-0.5"
-                    variant="destructive"
-                >
-                    2
-                </Badge>
-                <span className="sr-only">Wishlist</span>
-            </Button>
+            {user ? (
+                <Link href="/profile/wishlist">
+                    <WishlistButton number={user.wishlist.length} />
+                </Link>
+            ) : (
+                <WishlistButton disabled />
+            )}
 
             <Sheet>
                 <SheetTrigger asChild>
@@ -46,7 +63,6 @@ export default function NavButtons() {
                         className="relative"
                         variant="ghost"
                         size="icon"
-                        disabled={!user}
                     >
                         <ShoppingBag className="size-6" />
                         <Badge
@@ -66,7 +82,7 @@ export default function NavButtons() {
 
                     <div className="flex flex-col gap-4 divide-y divide-dotted">
                         {cart.cart?.items.map((item) => (
-                            <div className="flex gap-6 py-2.5">
+                            <div key={item.id} className="flex gap-6 py-2.5">
                                 <Image
                                     src={item.image}
                                     alt={item.name}

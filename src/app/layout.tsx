@@ -24,7 +24,6 @@ export default async function RootLayout({
     children: React.ReactNode
 }>) {
     const cart = await fetchCart()
-    console.log(cart)
     const user = await getUser()
 
     return (
