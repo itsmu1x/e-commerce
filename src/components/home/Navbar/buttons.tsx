@@ -80,7 +80,50 @@ export default function NavButtons() {
                         <SheetClose />
                     </SheetHeader>
 
-                    <div className="flex flex-col gap-4 divide-y divide-dotted">
+                    <div className="flex flex-col h-full overflow-y-auto gap-4">
+                        <div className="absolute bottom-0 left-0 rounded p-4 w-full min-h-44 bg-body">
+                            <div className="space-y-2">
+                                <div className="flex items-center justify-between">
+                                    <h1 className="text-lg font-semibold text-muted">
+                                        Subtotal
+                                    </h1>
+
+                                    <p className="text-sm font-medium text-muted">
+                                        ${cart.totalCents / 100}
+                                    </p>
+                                </div>
+
+                                <div className="flex items-center justify-between">
+                                    <h1 className="text-lg font-semibold text-muted">
+                                        Shipping
+                                    </h1>
+
+                                    <p className="text-sm font-medium uppercase text-muted">
+                                        free shipping
+                                    </p>
+                                </div>
+                            </div>
+
+                            <hr className="my-2" />
+
+                            <div className="flex items-center justify-between">
+                                <h1 className="text-lg font-semibold text-muted">
+                                    Total
+                                </h1>
+
+                                <p className="text-sm font-medium text-muted">
+                                    ${cart.totalCents / 100}
+                                </p>
+                            </div>
+
+                            <Button
+                                type="button"
+                                className="uppercase mt-4 w-full"
+                            >
+                                checkout
+                            </Button>
+                        </div>
+
                         {cart.cart?.items.map((item) => (
                             <div key={item.id} className="flex gap-6 py-2.5">
                                 <Image
