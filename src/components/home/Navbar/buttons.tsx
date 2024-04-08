@@ -1,5 +1,5 @@
 "use client"
-import { ShoppingBag, Star, User2 } from "lucide-react"
+import { ShoppingBag, Star, Trash2, User2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { useAuth } from "@/components/contexts/auth"
@@ -13,8 +13,8 @@ import {
     SheetTitle,
     SheetTrigger,
 } from "@/components/ui/sheet"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import Image from "next/image"
+import ntc from "ntcjs"
 
 export default function NavButtons() {
     const user = useAuth()
@@ -64,33 +64,58 @@ export default function NavButtons() {
                         <SheetClose />
                     </SheetHeader>
 
-                    <div className="space-y-2">
+                    <div className="flex flex-col gap-4 divide-y divide-dotted">
                         {cart.cart?.items.map((item) => (
-                            <Card key={item.id}>
-                                <CardContent className="mt-5">
-                                    <div className="flex items-center space-x-2">
-                                        <Image
-                                            src={item.image}
-                                            alt={item.name}
-                                            width={175}
-                                            height={175}
-                                            className="w-12 h-12 rounded-full"
-                                        />
-                                        <div className="flex flex-col space-y-1">
-                                            <Link
-                                                href={`/product/${item.id}`}
-                                                className="text-sm font-medium text-gray-900"
-                                            >
-                                                {item.name}
-                                            </Link>
-                                            <p className="text-sm text-gray-500">
-                                                description
-                                            </p>
-                                        </div>
+                            <div className="flex gap-6 py-2.5">
+                                <Image
+                                    src={item.image}
+                                    alt={item.name}
+                                    width={175}
+                                    height={175}
+                                    className="size-16 my-auto md:size-20"
+                                />
+
+                                <div className="flex my-auto flex-col space-y-1">
+                                    <div>
+                                        <Link
+                                            href={`/product/${item.id}`}
+                                            className="text-sm font-medium text-gray-900"
+                                        >
+                                            {item.name}
+                                        </Link>
+                                        <p className="text-sm text-muted">
+                                            {ntc.name(item.color)[1]} |{" "}
+                                            {item.size}
+                                        </p>
                                     </div>
-                                </CardContent>
-                            </Card>
+
+                                    <p className="flex items-center gap-1 text-sm text-muted">
+                                        ${item.price / 100} x{item.quantity}
+                                        <Trash2
+                                            onClick={() =>
+                                                cart.removeFromCart(item.id)
+                                            }
+                                            className="size-6 text-red-600 cursor-pointer"
+                                        />
+                                    </p>
+                                </div>
+                            </div>
                         ))}
+
+                        {cart.itemsCount === 0 && (
+                            <div>
+                                <h1 className="text-lg">
+                                    Oops! Your cart is empty.
+                                </h1>
+
+                                <Link
+                                    href="/shop"
+                                    className="text-sm text-muted"
+                                >
+                                    Add some items to your cart to get started.
+                                </Link>
+                            </div>
+                        )}
                     </div>
                 </SheetContent>
             </Sheet>

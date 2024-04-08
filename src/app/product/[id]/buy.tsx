@@ -27,9 +27,7 @@ export default function Buy({ product }: Props) {
     const removeFromCart = async () => {
         if (loading) return
         setLoading(true)
-        const result = await removeProductFromCart(product.id)
-        if (typeof result === "string") toast.error(result)
-        else cart.setCart(result)
+        await cart.removeFromCart(product.id)
         setLoading(false)
     }
 
@@ -51,6 +49,7 @@ export default function Buy({ product }: Props) {
             if (ref.current) {
                 ref.current.value = "1"
             }
+            toast.success("Product added to cart")
         }
         setLoading(false)
     }

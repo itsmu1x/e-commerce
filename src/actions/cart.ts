@@ -51,7 +51,7 @@ export async function addProductToCart(values: any) {
     const cart = await fetchCart() || { items: [] }
     if (cart.items.some(item => item.id === id)) return "This product is already in the cart"
 
-    cart.items.push({ id, name: product.name, image: product.images[0], size, color, quantity, price: product.cents * quantity })
+    cart.items.push({ id, name: product.name, image: product.images[0], size, color, quantity, price: product.cents })
     const [iv, cartHash] = encrypt(cart)
     setCartIvCookie(iv)
     setCartCookie(cartHash)
