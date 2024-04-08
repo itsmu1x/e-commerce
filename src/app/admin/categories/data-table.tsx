@@ -95,8 +95,8 @@ export function DataTable<TData extends Category, TValue>({
         if (response) {
             toast.error(response)
         } else {
-            event.currentTarget.reset()
             toast.success("Category added")
+            event.currentTarget?.reset()
         }
     }
 

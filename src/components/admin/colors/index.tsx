@@ -15,7 +15,7 @@ type ColorsProps = {
 type ColorProps = {
     hex: string
     active?: boolean
-    select: () => any
+    select?: () => any
 }
 
 export default function Colors({ state, colors }: ColorsProps) {
@@ -33,7 +33,7 @@ export default function Colors({ state, colors }: ColorsProps) {
     )
 }
 
-export function Color({ hex, active, select }: ColorProps) {
+export function Color({ hex, active, select = () => {} }: ColorProps) {
     const info = ntc.name(hex)
 
     return (
@@ -44,6 +44,7 @@ export function Color({ hex, active, select }: ColorProps) {
                         "w-8 h-8 rounded-full bg-body duration-100 outline-1 hover:outline hover:border-4 hover:border-white",
                         {
                             "outline border-4 border-white": active,
+                            "border-muted border": !active,
                         }
                     )}
                     style={{ backgroundColor: hex }}

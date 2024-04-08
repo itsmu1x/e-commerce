@@ -24,6 +24,7 @@ import {
     TooltipContent,
     TooltipTrigger,
 } from "@/components/ui/tooltip"
+import { Color } from "@/components/admin/colors"
 
 export type Product = Prisma.ProductGetPayload<{
     include: {
@@ -113,21 +114,7 @@ export const columns: ColumnDef<Product>[] = [
             return (
                 <div className="flex gap-0.5">
                     {row.original.hexes.map((hex) => {
-                        const name = ntc.name(hex)[1]
-
-                        return (
-                            <Tooltip key={hex}>
-                                <TooltipTrigger>
-                                    <div
-                                        style={{ backgroundColor: hex }}
-                                        className="size-6 rounded-full"
-                                    >
-                                        <span className="sr-only">{name}</span>
-                                    </div>
-                                </TooltipTrigger>
-                                <TooltipContent>{name}</TooltipContent>
-                            </Tooltip>
-                        )
+                        return <Color key={hex} hex={hex} active={false} />
                     })}
                 </div>
             )
