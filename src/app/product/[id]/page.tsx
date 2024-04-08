@@ -33,7 +33,7 @@ export default async function Page({
 
                         <div className="flex justify-between">
                             <p className="text-xl font-medium text-muted">
-                                ${product.cents / 100}
+                                ${(product.cents / 100).toFixed(2)}
                             </p>
 
                             <Wishlist productId={product.id} />

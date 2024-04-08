@@ -89,7 +89,7 @@ export default function NavButtons() {
                                     </h1>
 
                                     <p className="text-sm font-medium text-muted">
-                                        ${cart.totalCents / 100}
+                                        ${(cart.totalCents / 100).toFixed(2)}
                                     </p>
                                 </div>
 
@@ -112,7 +112,7 @@ export default function NavButtons() {
                                 </h1>
 
                                 <p className="text-sm font-medium text-muted">
-                                    ${cart.totalCents / 100}
+                                    ${(cart.totalCents / 100).toFixed(2)}
                                 </p>
                             </div>
 
@@ -149,7 +149,8 @@ export default function NavButtons() {
                                     </div>
 
                                     <p className="flex items-center gap-1 text-sm text-muted">
-                                        ${item.price / 100} x{item.quantity}
+                                        ${(item.price / 100).toFixed(2)} x
+                                        {item.quantity}
                                         <Trash2
                                             onClick={() =>
                                                 cart.removeFromCart(item.id)

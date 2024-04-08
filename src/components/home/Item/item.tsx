@@ -44,7 +44,7 @@ export default function Item({ product, padding }: Props) {
                 </Link>
 
                 <p className="text-muted font-semibold">
-                    ${product.cents / 100}
+                    ${(product.cents / 100).toFixed(2)}
                 </p>
             </div>
 
