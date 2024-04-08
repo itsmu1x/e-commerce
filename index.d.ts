@@ -30,9 +30,12 @@ declare global {
     namespace NodeJS {
         interface ProcessEnv {
             NEXT_PUBLIC_COOKIE_NAME: string
+            ORIGIN: string
+
             JWT_SECRET: string
             DATABASE_URL: string
             CIPHER_KEY: string
+            STRIPE_KEY: string
 
             // ImageKit
             IK_URL: string

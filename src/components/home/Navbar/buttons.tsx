@@ -15,6 +15,9 @@ import {
 } from "@/components/ui/sheet"
 import Image from "next/image"
 import ntc from "ntcjs"
+import { useState } from "react"
+import { makeCheckout } from "@/actions/stripe"
+import { toast } from "sonner"
 
 type WishlistProps = {
     disabled?: boolean
@@ -45,6 +48,15 @@ function WishlistButton({ disabled, number }: WishlistProps) {
 export default function NavButtons() {
     const user = useAuth()
     const cart = useCart()
+    const [loading, setLoading] = useState(false)
+
+    const checkout = async () => {
+        if (loading) return
+        setLoading(true)
+        const result = await makeCheckout()
+        if (result) toast.error(result)
+        setLoading(false)
+    }
 
     return (
         <div className="flex items-center gap-2">
@@ -117,6 +129,8 @@ export default function NavButtons() {
                             </div>
 
                             <Button
+                                disabled={loading}
+                                onClick={checkout}
                                 type="button"
                                 className="uppercase mt-4 w-full"
                             >

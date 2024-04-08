@@ -32,3 +32,9 @@ export function setCartCookie(value: string) {
     const cookieStore = cookies()
     cookieStore.set(CART_COOKIE_NAME, value, cookieOptions())
 }
+
+export function clearCartCookies() {
+    const cookieStore = cookies()
+    cookieStore.set(IV_COOKIE_NAME, "", cookieOptions(true))
+    cookieStore.set(CART_COOKIE_NAME, "", cookieOptions(true))
+}

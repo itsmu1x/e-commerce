@@ -17,11 +17,32 @@ model User {
     createdAt DateTime  @default(now()) @map("created_at")
     updatedAt DateTime  @updatedAt @map("updated_at")
     deletedAt DateTime? @map("deleted_at") // this is for the soft delete
+    orders    Order[]
 
     @@index([id])
     @@index([email])
     @@map("users")
 }
+
+model Order {
+    id          String    @id // it will be the session id from stripe idk
+    userId      String    @map("user_id")
+    createdAt   DateTime  @default(now()) @map("created_at")
+    completedAt DateTime? @map("completed_at")
+    cart        Json
+    // mode        Mode
+
+    user User @relation(fields: [userId], references: [id])
+
+    @@index([id])
+    @@index([userId])
+    @@map("orders")
+}
+
+// enum Mode {
+//     Production
+//     Development
+// } nah, unnecessary
 
 model Product {
     id         String   @id @default(cuid())
