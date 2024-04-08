@@ -76,8 +76,6 @@ export function DataTable<TData extends Category, TValue>({
         },
     })
 
-    console.log("@")
-
     const _deleteCategories = async () => {
         const ids: number[] = table
             .getSelectedRowModel()
@@ -96,6 +94,9 @@ export function DataTable<TData extends Category, TValue>({
         const response = await createCategory(formData)
         if (response) {
             toast.error(response)
+        } else {
+            event.currentTarget.reset()
+            toast.success("Category added")
         }
     }
 

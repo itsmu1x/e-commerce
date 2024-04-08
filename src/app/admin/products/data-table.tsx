@@ -102,6 +102,7 @@ export function DataTable<TData, TValue>({
             toast.error(response)
         } else {
             toast.success("Product added")
+            event.currentTarget.reset()
         }
     }
 
