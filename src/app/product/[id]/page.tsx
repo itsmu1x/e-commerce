@@ -2,11 +2,11 @@ import { Card } from "@/components/ui/card"
 import prisma from "@/lib/prisma"
 import { notFound } from "next/navigation"
 import Carousel from "./carousel"
-import { Button } from "@/components/ui/button"
-import { Package, Star, Truck } from "lucide-react"
+import { Package, Truck } from "lucide-react"
 import payments from "@/assets/payments.webp"
 import Image from "next/image"
 import Buy from "./buy"
+import Wishlist from "./wishlist"
 
 export default async function Page({
     params: { id },
@@ -36,13 +36,7 @@ export default async function Page({
                                 ${product.cents / 100}
                             </p>
 
-                            <Button
-                                variant="outline"
-                                className="rounded-full"
-                                size="icon"
-                            >
-                                <Star className="size-5" />
-                            </Button>
+                            <Wishlist productId={product.id} />
                         </div>
                     </div>
 

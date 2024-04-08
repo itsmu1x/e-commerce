@@ -6,6 +6,7 @@ import bcrypt from "bcrypt"
 import { isRedirectError } from "next/dist/client/components/redirect"
 import { createUserJwtToken, getUser, setTokenCookie } from "@/lib/auth"
 import { revalidatePath } from "next/cache"
+import { z } from "zod"
 
 export async function login(values: any) {
     const result = loginSchema.safeParse(values)
@@ -61,6 +62,36 @@ export async function signup(values: any) {
 
         return "Something went wrong"
     }
+}
+
+export async function wishlistProduct(value: any) {
+    const user = await getUser()
+    if (!user) return "Unauthorized"
+
+    const result = z.string().min(2).max(100).safeParse(value)
+    if (!result.success) return "Couldn't find the product"
+
+    const product = await prisma.product.findFirst({
+        where: {
+            id: result.data,
+        },
+    })
+    if (!product) return "Couldn't find the product"
+
+    const has = user.wishlist.includes(product.id)
+    await prisma.user.update({
+        where: {
+            id: user.id,
+        },
+        data: {
+            wishlist: {
+                set: has ? [...user.wishlist].filter(d => d !== product.id) : [...user.wishlist, product.id],
+            }
+        }
+    })
+
+    revalidatePath("/product/*")
+    return !has
 }
 
 export async function accountSettings(values: any) {

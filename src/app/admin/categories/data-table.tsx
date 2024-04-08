@@ -76,6 +76,8 @@ export function DataTable<TData extends Category, TValue>({
         },
     })
 
+    console.log("@")
+
     const _deleteCategories = async () => {
         const ids: number[] = table
             .getSelectedRowModel()
