@@ -29,7 +29,7 @@ export default function NavList({ list, children }: NavProps) {
             <div className="flex divide-x bg-white shadow-md">
                 <aside
                     className={cn(
-                        "z-40 bg-white h-full w-72 fixed top-0 duration-300 left-0 lg:sticky",
+                        "z-40 lg:z-0 bg-white h-full w-72 fixed top-0 lg:top-32 duration-300 left-0 lg:sticky",
                         opened && "translate-x-0",
                         !opened && "-translate-x-full lg:translate-x-0"
                     )}
