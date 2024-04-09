@@ -99,6 +99,7 @@ export async function createProduct(formData: FormData) {
                 },
             })
 
+
             if (response.url) {
                 urls.push(response.url)
             }

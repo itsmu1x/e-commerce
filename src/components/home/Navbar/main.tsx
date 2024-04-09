@@ -18,12 +18,12 @@ export default function MainNavbar() {
             <div className="container py-4 flex justify-between">
                 <div className="inline-flex items-center gap-1">
                     <Sheet>
-                        <SheetTrigger>
+                        <SheetTrigger aria-label="Menu">
                             <Tooltip>
                                 <TooltipTrigger
                                     className="md:hidden"
-                                    asChild
                                     aria-label="Menu"
+                                    asChild
                                 >
                                     <MenuIcon className="size-8 md:size-12" />
                                 </TooltipTrigger>
