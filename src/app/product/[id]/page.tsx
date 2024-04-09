@@ -29,7 +29,7 @@ export async function generateMetadata({
 
     const i = {
         title: product.name,
-        description: `Product ${product.name} for only ${(
+        description: `Product ${product.name} for only $${(
             product.cents / 100
         ).toFixed(2)}`,
         images: product.images,
