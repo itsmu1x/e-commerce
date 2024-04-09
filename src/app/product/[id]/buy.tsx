@@ -80,7 +80,7 @@ export default function Buy({ product }: Props) {
             <div>
                 <p>Quantity</p>
 
-                <div className="flex gap-2 mt-2 max-w-full">
+                <div className="flex flex-col md:flex-row gap-2 mt-2 max-w-full">
                     <div className="relative flex">
                         <Input
                             type="number"
