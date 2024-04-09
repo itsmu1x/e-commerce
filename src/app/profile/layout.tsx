@@ -2,6 +2,7 @@ import { Heart, LogOut, ShoppingCart, User, UserCog } from "lucide-react"
 import { redirect } from "next/navigation"
 import { getUser } from "@/lib/auth"
 import NavList from "@/components/admin/Nav"
+import { Metadata } from "next"
 
 const NAVS = [
     {
@@ -31,6 +32,10 @@ const NAVS = [
         icon: <LogOut className="size-6" />,
     },
 ]
+
+export const metadata: Metadata = {
+    title: "Profile",
+}
 
 export default async function Layout({
     children,

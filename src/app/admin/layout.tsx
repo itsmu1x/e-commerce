@@ -2,6 +2,11 @@ import { LogOut, User2, Blocks, Boxes, Compass } from "lucide-react"
 import { notFound } from "next/navigation"
 import { getUser } from "@/lib/auth"
 import NavList from "@/components/admin/Nav"
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+    title: "Admin Panel",
+}
 
 const NAVS = [
     {

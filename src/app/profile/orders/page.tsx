@@ -11,6 +11,11 @@ import {
 import { getUser } from "@/lib/auth"
 import prisma from "@/lib/prisma"
 import { cn } from "@/lib/utils"
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+    title: "Your Orders",
+}
 
 export default async function Orders() {
     const user = await getUser()

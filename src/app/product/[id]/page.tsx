@@ -7,12 +7,49 @@ import payments from "@/assets/payments.webp"
 import Image from "next/image"
 import Buy from "./buy"
 import Wishlist from "./wishlist"
+import type { Metadata } from "next"
 
-export default async function Page({
-    params: { id },
-}: {
+type Props = {
     params: { id: string }
-}) {
+}
+
+export async function generateMetadata({
+    params: { id },
+}: Props): Promise<Metadata> {
+    const product = await prisma.product.findFirst({
+        where: {
+            OR: [{ id }, { slug: id }],
+        },
+    })
+
+    if (!product)
+        return {
+            title: "Product",
+        }
+
+    const i = {
+        title: product.name,
+        description: `Product ${product.name} for only ${(
+            product.cents / 100
+        ).toFixed(2)}`,
+        images: product.images,
+    }
+
+    return {
+        ...i,
+        openGraph: {
+            type: "website",
+            url: `${process.env.ORIGIN}/product/${product.slug ?? product.id}`,
+            ...i,
+        },
+        twitter: {
+            card: "summary_large_image",
+            ...i,
+        },
+    }
+}
+
+export default async function Page({ params: { id } }: Props) {
     const product = await prisma.product.findFirst({
         where: {
             OR: [{ id }, { slug: id }],

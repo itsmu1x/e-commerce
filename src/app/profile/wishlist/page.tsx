@@ -1,6 +1,11 @@
 import Item from "@/components/home/Item/item"
 import { getUser } from "@/lib/auth"
 import prisma from "@/lib/prisma"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+    title: "Wishlist",
+}
 
 export default async function Wishlist() {
     const user = await getUser()

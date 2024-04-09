@@ -1,9 +1,19 @@
 import { fetchProducts } from "@/lib/auth"
 import Shop from "@/components/admin/shop"
 import prisma from "@/lib/prisma"
+import { Metadata } from "next"
 
 type Props = {
     searchParams: Record<string, string>
+}
+
+export const metadata: Metadata = {
+    title: "Shop",
+    openGraph: {
+        type: "website",
+        url: `${process.env.ORIGIN}/shop`,
+        title: "Shop",
+    },
 }
 
 export default async function ShopPage({ searchParams }: Props) {
