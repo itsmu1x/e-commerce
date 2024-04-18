@@ -4,7 +4,7 @@ A Next.js 14 e-commerce web application for selling clothes, handling payments v
 
 ### Requirements
 
--   You should have an [Stripe](https://stripe.com/) account.
+-   You should have a [Stripe](https://stripe.com/) account.
 -   You should have an [ImageKit](https://imagekit.io/) account.
 
 ### Installing your dependencies
